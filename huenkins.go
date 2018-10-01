@@ -6,6 +6,7 @@ import (
 
 	"github.com/iostrovok/huenkins/huenkins/jobstack"
 	"github.com/iostrovok/huenkins/huenkins/print"
+	"github.com/iostrovok/huenkins/huenkins/tasks/task"
 )
 
 const (
@@ -41,7 +42,9 @@ func main() {
 
 `, print.Add("StringData", "stringData", "IntData", 9999, "BoolData", true))
 
-	stack := jobstack.New()
-	dump, err := stack.Dump("")
-	print.Printf("dump: {{.dump}}, err: {{.err}}\n", print.Add("dump", dump, "err", err))
+	// stack := jobstack.New()
+	// dump, err := stack.Dump("")
+	// print.Printf("dump: {{.dump}}, err: {{.err}}\n", print.Add("dump", dump, "err", err))
+	print.Printf("task: {{.task}}\n", print.Add("task", task.New()))
+
 }
