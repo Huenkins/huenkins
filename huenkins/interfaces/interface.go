@@ -2,6 +2,10 @@ package interfaces
 
 var AllPluginFunctions []string = []string{"Init", "Version", "Methods"}
 
+const (
+	STAGE_LOAD_REPO = "stage_load_repo"
+)
+
 type GlobalContext struct {
 }
 
