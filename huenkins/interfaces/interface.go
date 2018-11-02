@@ -9,7 +9,7 @@ const (
 type GlobalContext struct {
 }
 
-type PluginLoader struct {
+type JobLoader struct {
 }
 
 type PluginInOut struct {
@@ -55,6 +55,10 @@ type Plugin interface {
 	Version() string
 	Methods() []string
 	Run(string, ...interface{}) error
+}
+
+type Job interface {
+	Run() error
 }
 
 type PluginCreateFunction func() (Plugin, error)
