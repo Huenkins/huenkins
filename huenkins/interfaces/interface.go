@@ -9,6 +9,9 @@ const (
 type GlobalContext struct {
 }
 
+type PluginLoader struct {
+}
+
 type PluginInOut struct {
 	StringList  []string
 	IntList     []int
