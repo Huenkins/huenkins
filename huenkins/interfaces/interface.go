@@ -52,7 +52,7 @@ type Plugin interface {
 	Version() string
 	Methods() []string
 	Run(string, ...interface{}) error
-	Call(string, v ...interface{}) (interface{}, error)
+	Call(string, ...interface{}) (interface{}, error)
 }
 
 type Job interface {
