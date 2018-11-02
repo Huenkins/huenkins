@@ -9,9 +9,6 @@ const (
 type GlobalContext struct {
 }
 
-type JobLoader struct {
-}
-
 type PluginInOut struct {
 	StringList  []string
 	IntList     []int
@@ -59,6 +56,10 @@ type Plugin interface {
 
 type Job interface {
 	Run() error
+}
+
+type JobLoader interface {
+	Load(Job) error
 }
 
 type PluginCreateFunction func() (Plugin, error)
