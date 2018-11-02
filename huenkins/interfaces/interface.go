@@ -63,6 +63,10 @@ type JobLoader interface {
 }
 
 type GlobalJob interface {
+	Stage(string, error) error
+	Log(...interface{})
+	DeleteDir()
+	Dir(string)
 }
 
 type PluginCreateFunction func() (Plugin, error)
