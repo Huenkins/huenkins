@@ -9,7 +9,7 @@ const (
 type GlobalContext struct {
 }
 
-type PluginParameter struct {
+type PluginInOut struct {
 	StringList  []string
 	IntList     []int
 	Float64List []float64
@@ -20,31 +20,38 @@ type PluginParameter struct {
 	IntVal     int
 	Float64Val float64
 	Float32Val float32
-	ByteVal    []byte
+	ByteVal    byte
 
-	MSI map[string]interface{}
-}
-
-type PluginResult struct {
-	StringList  []string
-	IntList     []int
-	Float64List []float64
-	Float32List []float32
-
-	StringVal  string
-	IntVal     int
-	Float64Val float64
-	Float32Val float32
-
+	MSI   map[string]interface{}
+	MSS   map[string]string
+	Stage string
 	Error error
 }
 
-type PluginFunction func(PluginParameter) PluginResult
+// type PluginResult struct {
+// 	StringList  []string
+// 	IntList     []int
+// 	Float64List []float64
+// 	Float32List []float32
+// 	ByteList    []byte
+
+// 	StringVal  string
+// 	IntVal     int
+// 	Float64Val float64
+// 	Float32Val float32
+// 	ByteVal    byte
+
+// 	Error error
+// }
+
+type PluginFunction func(PluginInOut) PluginInOut
 
 type Plugin interface {
-	Init(PluginParameter) PluginResult
-	Version(PluginParameter) PluginResult
-	Methods(PluginParameter) PluginResult
+	Init(PluginInOut) error
+	Name() string
+	Version() string
+	Methods() []string
+	Run(string, ...interface{}) error
 }
 
 type PluginCreateFunction func() (Plugin, error)
