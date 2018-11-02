@@ -62,4 +62,7 @@ type JobLoader interface {
 	Load(Job) error
 }
 
+type GlobalJob interface {
+}
+
 type PluginCreateFunction func() (Plugin, error)
