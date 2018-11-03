@@ -46,12 +46,23 @@ type PluginInOut struct {
 
 type PluginFunction func(PluginInOut) PluginInOut
 
-type Plugin interface {
+type BasePlugin interface {
 	Init(PluginInOut) error
 	Name() string
 	Version() string
 	Methods() []string
 	Run(string, ...interface{}) error
+}
+
+type Plugin interface {
+	Name() string
+	Version() string
+	Methods() []string
+	Run(string, ...interface{}) error
+
+	Call(methodName string, vals ...interface{}) (res interface{}, err error)
+	Int64(methodName string, vals ...interface{}) (res int64, err error)
+	String(methodName string, vals ...interface{}) (res string, err error)
 }
 
 type Job interface {
