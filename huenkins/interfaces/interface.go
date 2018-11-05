@@ -6,9 +6,6 @@ const (
 	STAGE_LOAD_REPO = "stage_load_repo"
 )
 
-type GlobalContext struct {
-}
-
 type PluginInOut struct {
 	StringList  []string
 	IntList     []int
@@ -58,8 +55,8 @@ type Plugin interface {
 	Name() string
 	Version() string
 	Methods() []string
-	Run(string, ...interface{}) error
 
+	Run(string, ...interface{}) error
 	Call(methodName string, vals ...interface{}) (res interface{}, err error)
 	Int64(methodName string, vals ...interface{}) (res int64, err error)
 	String(methodName string, vals ...interface{}) (res string, err error)
@@ -69,15 +66,20 @@ type Job interface {
 	Run() error
 }
 
-type JobLoader interface {
-	Load(Job) error
-}
+// type JobLoader interface {
+// 	LoadJob(Job) error
+// }
 
 type GlobalJob interface {
 	Stage(string, error) error
+	NextStep(...string) error
 	Log(...interface{})
 	DeleteDir()
 	Dir(string)
+	LoadJob(Job) error
+}
+
+type GlobalContext interface {
 }
 
 type PluginCreateFunction func() (Plugin, error)
