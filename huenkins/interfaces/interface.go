@@ -4,6 +4,8 @@ var AllPluginFunctions []string = []string{"Init", "Version", "Methods"}
 
 const (
 	STAGE_LOAD_REPO = "stage_load_repo"
+	PLUGIN_TYPE     = "plugin"
+	JOB_TYPE        = "job"
 )
 
 type PluginInOut struct {
@@ -47,19 +49,20 @@ type BasePlugin interface {
 	Init(PluginInOut) error
 	Name() string
 	Version() string
-	Methods() []string
+	Methods() ([]string, error)
 	Run(string, ...interface{}) error
 }
 
 type Plugin interface {
 	Name() string
 	Version() string
-	Methods() []string
+	Methods() ([]string, error)
 
 	Run(string, ...interface{}) error
-	Call(methodName string, vals ...interface{}) (res interface{}, err error)
-	Int64(methodName string, vals ...interface{}) (res int64, err error)
-	String(methodName string, vals ...interface{}) (res string, err error)
+	Call(methodName string, vals ...interface{}) (interface{}, error)
+	Int64(methodName string, vals ...interface{}) (int64, error)
+	String(methodName string, vals ...interface{}) (string, error)
+	StringList(methodName string, vals ...interface{}) ([]string, error)
 }
 
 type Job interface {
