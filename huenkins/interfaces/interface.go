@@ -1,5 +1,9 @@
 package interfaces
 
+import (
+	"github.com/Huenkins/gorm"
+)
+
 var AllPluginFunctions []string = []string{"Init", "Version", "Methods"}
 
 const (
@@ -7,6 +11,11 @@ const (
 	PLUGIN_TYPE     = "plugin"
 	JOB_TYPE        = "job"
 )
+
+type SqlStorage interface {
+	NewStorage(string, string) error
+	GetDB(string) *gorm.DB
+}
 
 type PluginInOut struct {
 	StringList  []string
@@ -26,22 +35,6 @@ type PluginInOut struct {
 	Stage string
 	Error error
 }
-
-// type PluginResult struct {
-// 	StringList  []string
-// 	IntList     []int
-// 	Float64List []float64
-// 	Float32List []float32
-// 	ByteList    []byte
-
-// 	StringVal  string
-// 	IntVal     int
-// 	Float64Val float64
-// 	Float32Val float32
-// 	ByteVal    byte
-
-// 	Error error
-// }
 
 type PluginFunction func(PluginInOut) PluginInOut
 
